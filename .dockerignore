@@ -1,0 +1,6 @@
+node-modules
+.git
+.vscode
+docker-compose*
+README.md
+Dockerfile*
