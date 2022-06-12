@@ -12,8 +12,10 @@ class ActivityRepository implements IActivityRepository {
   constructor() {
     this.ormRepository = getRepository(Activity);
   }
-  searchBody_UserByName(whitch_food_ate: string, whitch_food_drank: string, smoked: string): Promise<Activity[]> {
-    throw new Error('Method not implemented.');
+  findAllUserActivity(user_id: string): Promise<Activity[]> {
+    return this.ormRepository.find({
+      where: { user_id },
+    });
   }
 
   public async findAll(): Promise<Activity[]> {

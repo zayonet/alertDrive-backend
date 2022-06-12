@@ -12,9 +12,7 @@ class CountryRepository implements ICountryRepository {
   constructor() {
     this.ormRepository = getRepository(Country);
   }
-  searchCountryByName(country_name: string): Promise<Country[]> {
-    throw new Error('Method not implemented.');
-  }
+  
 
   public async findAll(): Promise<Country[]> {
     return this.ormRepository.find();
@@ -27,14 +25,14 @@ class CountryRepository implements ICountryRepository {
     });
   }
 
-  public async searcUserByName(country_name: string): Promise<Country[]> {
+  public async searchCountryByName(country_name: string): Promise<Country[]> {
     return this.ormRepository.find({
       country_name: Like(`%${country_name
         }%`),
     });
   }
 
-  public async create({ country_name }: ICreateCountryDTO): Promise<Country> {
+  public async create({ countrycode, country_name, phoneCode }: ICreateCountryDTO): Promise<Country> {
 
     const checkCountry = await this.ormRepository.findOne({
       where: { country_name },
@@ -45,7 +43,9 @@ class CountryRepository implements ICountryRepository {
     }
 
     const country = this.ormRepository.create({
-      country_name
+      countrycode,
+      country_name,
+      phoneCode
     });
 
     await this.ormRepository.save(country);

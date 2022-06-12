@@ -8,6 +8,7 @@ const modelController = new ModelController();
 
 modelRoutes.get('/', modelController.index);
 modelRoutes.get('/search', modelController.search);
+modelRoutes.get('/vehicle/:vehicle_id', modelController.findAllVehicleModels);
 //modelRoutes.get('/:id', authenticate, modelController.show);
 modelRoutes.post('/', modelController.create);
 //modelRoutes.put('/:id', authenticate, modelController.updates);

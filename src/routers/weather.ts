@@ -13,6 +13,8 @@ weatherRoutes.use(authenticate);
 weatherRoutes.get('/', weatherController.index);
 //weatherRoutes.get('/search', weatherController.search);
 //weatherRoutes.get('/:id', weatherController.show);
+weatherRoutes.get('/vehicle/:vehicle_id', weatherController.findAllVehicleWeather);
+weatherRoutes.get('/user/:user_id', weatherController.findAllUserWeather);
 weatherRoutes.post('/', weatherController.create);
 //weatherRoutes.put('/:id', weatherController.updates);
 //weatherRoutes.patch('/:id', weatherController.enable);

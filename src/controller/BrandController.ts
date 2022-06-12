@@ -3,6 +3,7 @@ import CreateBrandService from '../services/brand/CreateBrandService';
 import BrandRepository from '../repositories/BrandRepository/BrandRepository';
 import DeleteBrandService from '../services/brand/DeleteBrandService';
 import logger from '../logs';
+import ListAllBrandOfUserService from '../services/brand/ListAllBandsOfVehicleService';
 
 class BrandController {
 
@@ -14,6 +15,17 @@ class BrandController {
     return response.json(brands);
   }
 
+  public async findAllVehicleBrands(request: Request, response: Response): Promise<Response> {
+    const { vehicle_id } = request.params;
+    const brandsRepository = new BrandRepository();
+    const brandsService = new ListAllBrandOfUserService(
+      brandsRepository,
+    );
+
+    const brands = await brandsService.execute(vehicle_id);
+
+    return response.json(brands);
+  }
   /* public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const brandsRepository = new BrandRepository();

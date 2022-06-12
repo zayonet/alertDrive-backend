@@ -23,6 +23,11 @@ class Job_UserRepository implements IJob_UserRepository {
       where: { id },
     });
   }
+  public async findAllUserJob_User(user_id: string): Promise<Job_User[]> {
+    return this.ormRepository.find({
+      where: { user_id }
+    });
+  }
 
   public async searchJob_UserByCompany(job_user_occupation: string): Promise<Job_User[]> {
     return this.ormRepository.find({

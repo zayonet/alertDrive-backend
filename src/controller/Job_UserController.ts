@@ -3,6 +3,7 @@ import CreateJob_UserService from '../services/job_user/CreateJob_UserService';
 import Job_UserRepository from '../repositories/Job_User/Job_UserRepository';
 import DeleteJob_UserService from '../services/job_user/DeleteJob_UserService';
 import logger from '../logs';
+import ListAllJob_UserOfUserService from '../services/job_user/ListAllJobOfUserService';
 
 class Job_UserController {
 
@@ -14,6 +15,19 @@ class Job_UserController {
     return response.json(job_users);
   }
 
+  public async findAllUserJob_User(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const job_UserRepository = new Job_UserRepository();
+    const job_UserService = new ListAllJob_UserOfUserService(
+      job_UserRepository,
+    );
+
+    const job_User = await job_UserService.execute(user_id);
+
+    return response.json(job_User);
+  }
+
+  
   public async search(request: Request, response: Response): Promise<Response> {
     const { name } = request.query;
     const job_usersRepository = new Job_UserRepository();

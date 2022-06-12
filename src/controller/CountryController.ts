@@ -25,12 +25,12 @@ class CountryController {
   } */
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { country_name } = request.body;
+    const { countrycode,country_name,phoneCode } = request.body;
 
     const countryRespository = new CountryRepository();
     const createCountry = new CreateCountryService(countryRespository);
 
-    const country = await createCountry.execute({ country_name });
+    const country = await createCountry.execute({ countrycode,country_name,phoneCode });
 
     return response.json(country);
   }

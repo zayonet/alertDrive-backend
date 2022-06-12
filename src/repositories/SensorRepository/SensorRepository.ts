@@ -34,6 +34,18 @@ class SensorRepository implements ISensorRepository {
     });
   }
 
+  public async findAllVehicleSensors(vehicle_id: string): Promise<Sensor[]> {
+    return this.ormRepository.find({
+      where: { vehicle_id },
+    });
+  }
+
+  public async findAllUserSensors(user_id: string): Promise<Sensor[]> {
+    return this.ormRepository.find({
+      where: { user_id },
+    });
+  }
+
   public async create({
     accelerometerX,
     accelerometerY,
