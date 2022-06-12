@@ -33,6 +33,18 @@ class WeatherRepository implements IWeatherRepository {
     });
   }
 
+  public async findAllUserWeather(user_id: string): Promise<Weather[]> {
+    return this.ormRepository.find({
+      where: { user_id },
+    });
+  }
+
+  public async findAllVehicleWeather(vehicle_id: string): Promise<Weather[]> {
+    return this.ormRepository.find({
+      where: { vehicle_id },
+    });
+  }
+
   public async create({ road_type, current_speed, free_flow_speed, data_confidence, weather_description, temperature, pressure, humidity, visibility, wind_speed, wind_direction, cloudiness, user_id, vehicle_id }: ICreateWeatherDTO): Promise<Weather> {
 
 

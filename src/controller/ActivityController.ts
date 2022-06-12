@@ -3,6 +3,7 @@ import CreateActivityService from '../services/activity/CreateActivityService';
 import ActivityRepository from '../repositories/ActivityRepository/ActivityRepository';
 import DeleteActivityService from '../services/activity/DeleteActivityService';
 import logger from '../logs';
+import ListAllActivityOfUserService from '../services/activity/ListAllActivitiesOfUserService';
 
 class ActivityController {
 
@@ -10,6 +11,18 @@ class ActivityController {
     const activitiesRepository = new ActivityRepository();
 
     const activities = await activitiesRepository.findAll();
+
+    return response.json(activities);
+  }
+
+  public async findAllUserActivity(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const activitiesRepository = new ActivityRepository();
+    const activitiesService = new ListAllActivityOfUserService(
+      activitiesRepository,
+    );
+
+    const activities = await activitiesService.execute(user_id);
 
     return response.json(activities);
   }

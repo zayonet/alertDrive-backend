@@ -1,4 +1,4 @@
-import IDeseaseRepository from '../../repositories/DeseaseRepository/ICountryRepository';
+import IDeseaseRepository from '../../repositories/DeseaseRepository/IDeseaseRepository';
 import AppError from '../../errors/AppError';
 import UsersRepository from '../../repositories/UserRepository';
 //import ListAllBooksOfUserService from './ListAllBooksOfUserService';

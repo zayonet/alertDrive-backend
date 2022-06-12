@@ -9,6 +9,7 @@ const historyUserController = new History_UserController();
 
 historyUserRoutes.get('/', historyUserController.index);
 //historyUserRoutes.get('/search', historyUserController.search);
+historyUserRoutes.get('/user/:user_id', historyUserController.findAllUserHistory_User);
 //historyUserRoutes.get('/:id', authenticate, historyUserController.show);
 historyUserRoutes.post('/', historyUserController.create);
 ///historyUserRoutes.put('/:id', authenticate, ValidateUserSchemaOnUpdating, validateRequestSchema, historyUserController.updates);

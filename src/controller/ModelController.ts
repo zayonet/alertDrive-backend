@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CreateModelService from '../services/model/CreateModelService';
 import ModelRepository from '../repositories/ModelRepository/ModelRepository';
 import DeleteModelService from '../services/model/DeleteModelService';
+import ListAllModelOfUserService from "../services/model/ListAllModelOfVehicleService"
 import logger from '../logs';
 
 class ModelController {
@@ -10,6 +11,18 @@ class ModelController {
     const modelsRepository = new ModelRepository();
 
     const models = await modelsRepository.findAll();
+
+    return response.json(models);
+  }
+
+  public async findAllVehicleModels(request: Request, response: Response): Promise<Response> {
+    const { vehicle_id } = request.params;
+    const modelsRepository = new ModelRepository();
+    const modelsService = new ListAllModelOfUserService(
+      modelsRepository,
+    );
+
+    const models = await modelsService.execute(vehicle_id);
 
     return response.json(models);
   }

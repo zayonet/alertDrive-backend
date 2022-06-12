@@ -3,6 +3,7 @@ import CreateHistoryUserService from '../services/historyUser/CreateHistoryUserS
 import HistoryUserRepository from '../repositories/HistoryUserRepository/HistoryUserRepository';
 import DeleteHistoryUserService from '../services/historyUser/DeleteHistoryUserService';
 import logger from '../logs';
+import ListAllHistoryOfUserService from '../services/historyUser/ListAllHistoryOfUserService';
 
 class HistoryUserController {
 
@@ -12,6 +13,18 @@ class HistoryUserController {
     const historyUsers = await historyUsersRepository.findAll();
 
     return response.json(historyUsers);
+  }
+
+  public async findAllUserHistory_User(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const brandsRepository = new HistoryUserRepository();
+    const brandsService = new ListAllHistoryOfUserService(
+      brandsRepository,
+    );
+
+    const activities = await brandsService.execute(user_id);
+
+    return response.json(activities);
   }
 
   /* public async show(request: Request, response: Response): Promise<Response> {
