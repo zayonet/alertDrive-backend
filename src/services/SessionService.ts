@@ -4,6 +4,8 @@ import IUserRepository from '../repositories/IUserRepository';
 import UserRepository from '../repositories/UserRepository';
 import User from '../models/User';
 import AppError from '../errors/AppError';
+import Cryptr from 'cryptr';
+import base64 from 'base-64';
 
 interface Request {
   email: string;
@@ -48,8 +50,17 @@ class SessionService {
       expiresIn: '1d',
     });
 
+    /* var decodedData = base64.decode('$2a$08$GZjVQWjPRkcdhy8mOdReAeqQrLVsew6GOavy4O4PGhS4GJsDRxxBO');
+    console.log(decodedData); */
+
     const deleteUserPwd: IUser = { password: user.password };
     delete deleteUserPwd.password;
+
+
+    /* const cryptr = new Cryptr('$2a$08$GZjVQWjPRkcdhy8mOdReAeqQrLVsew6GOavy4O4PGhS4GJsDRxxBO');
+
+    const decryptedString = cryptr.decrypt('$2a$08$GZjVQWjPRkcdhy8mOdReAeqQrLVsew6GOavy4O4PGhS4GJsDRxxBO');
+    console.log(decryptedString); */
 
     return {
       token,

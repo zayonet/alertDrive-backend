@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import SessionService from '../services/SessionService';
 import UserRepository from '../repositories/UserRepository';
+import Cryptr from 'cryptr';
 
 class SessionController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
-
     const userRespository = new UserRepository();
     const createSesison = new SessionService(userRespository);
 
@@ -13,6 +13,7 @@ class SessionController {
       email,
       password,
     });
+
 
     return response.json(session);
   }
