@@ -8,6 +8,7 @@ const brandController = new BrandController();
 
 brandRoutes.get('/', brandController.index);
 brandRoutes.get('/search', brandController.search);
+brandRoutes.get('/vehicle/:vehicle_id', brandController.findAllVehicleBrands);
 //brandRoutes.get('/:id', authenticate, brandController.show);
 brandRoutes.post('/', brandController.create);
 //brandRoutes.put('/:id', authenticate, brandController.updates);

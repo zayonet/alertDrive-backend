@@ -11,6 +11,7 @@ vehicleRoutes.use(authenticate);
 
 vehicleRoutes.get('/', vehicleController.index);
 //vehicleRoutes.get('/search', vehicleController.search);
+vehicleRoutes.get('/user/:user_id', vehicleController.findAllUserVehicle);
 //vehicleRoutes.get('/:id', authenticate, vehicleController.show);
 vehicleRoutes.post('/', vehicleController.create);
 vehicleRoutes.put('/:id', vehicleController.updates);

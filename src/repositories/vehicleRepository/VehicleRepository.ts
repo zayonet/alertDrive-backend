@@ -17,7 +17,7 @@ class VehicleRepository implements IVehicleRepository {
     this.ormRepository = getRepository(Vehicle);
     this.ormRepositoryModel = getRepository(Model);
   }
-
+  
   public async findAll(): Promise<Vehicle[]> {
     return this.ormRepository.find();
   }
@@ -32,6 +32,11 @@ class VehicleRepository implements IVehicleRepository {
   public async searcVehicleByName(brand: string): Promise<Vehicle[]> {
     return this.ormRepository.find({
       brand: Like(`%${brand}%`),
+    });
+  }
+  public async findAllUserVehicle(user_id: string): Promise<Vehicle[]> {
+    return this.ormRepository.find({
+      where: { user_id },
     });
   }
 

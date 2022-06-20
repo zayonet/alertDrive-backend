@@ -3,6 +3,7 @@ import CreateDeseaseService from '../services/desease/CreateDeseaseService';
 import DeseaseRepository from '../repositories/DeseaseRepository/DeseaseRepository';
 import DeleteDeseaseService from '../services/desease/DeleteDeseaseService';
 import logger from '../logs';
+import ListAllDeseaseOfUserService from '../services/desease/ListAllDeseaseOfUserService';
 
 class DeseaseController {
 
@@ -10,6 +11,18 @@ class DeseaseController {
     const deseasesRepository = new DeseaseRepository();
 
     const deseases = await deseasesRepository.findAll();
+
+    return response.json(deseases);
+  }
+
+  public async findAllUserDesease(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const deseasesRepository = new DeseaseRepository();
+    const deseasesService = new ListAllDeseaseOfUserService(
+      deseasesRepository,
+    );
+
+    const deseases = await deseasesService.execute(user_id);
 
     return response.json(deseases);
   }

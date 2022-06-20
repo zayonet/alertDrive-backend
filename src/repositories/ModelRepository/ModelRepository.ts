@@ -34,6 +34,13 @@ class ModelRepository implements IModelRepository {
     });
   }
 
+  findAllVehicleModels(vehicle_id: string): Promise<Model[]> {
+    return this.ormRepository.find({
+      where: { vehicle_id },
+    });
+  }
+
+  
   public async searcModelByName(model: string): Promise<Model[]> {
     return this.ormRepository.find({
       model: Like(`%${model}%`),

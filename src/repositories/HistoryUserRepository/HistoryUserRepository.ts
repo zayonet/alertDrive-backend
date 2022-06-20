@@ -30,6 +30,13 @@ class History_UserRepository implements IHistory_UserRepository {
     });
   }
 
+  findAllUserHistory_User(user_id: string): Promise<History_User[]> {
+    return this.ormRepository.find({
+      where: { user_id },
+    });
+  }
+
+  
   public async create({ accident_before, is_taking_medicine_now, is_sick_now, user_id, description
   }: ICreateHistory_UserDTO): Promise<History_User> {
     const checkUser = await this.ormRepository.findOne({

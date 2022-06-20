@@ -1,6 +1,6 @@
 
 import { hash } from 'bcryptjs';
-import IDeseaseRepository from '../../repositories/DeseaseRepository/ICountryRepository';
+import IDeseaseRepository from '../../repositories/DeseaseRepository/IDeseaseRepository';
 import DeseaseRepository from '../../repositories/DeseaseRepository/DeseaseRepository';
 import { Desease } from '../../models/Desease';
 

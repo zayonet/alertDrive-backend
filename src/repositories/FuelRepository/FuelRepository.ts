@@ -34,6 +34,12 @@ class FuelRepository implements IFuelRepository {
     });
   }
 
+  findAllVehicleFuels(vehicle_id: string): Promise<Fuel[]> {
+    return this.ormRepository.find({
+      where: { vehicle_id },
+    });
+  }
+
   public async searcFuelByName(fuel: string): Promise<Fuel[]> {
     return this.ormRepository.find({
       fuel: Like(`%${fuel}%`),

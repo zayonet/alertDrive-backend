@@ -9,6 +9,7 @@ const deseaseController = new DeseaseController();
 
 deseaseRoutes.get('/', deseaseController.index);
 //deseaseRoutes.get('/search', deseaseController.search);
+deseaseRoutes.get('/user/:user_id', deseaseController.findAllUserDesease);
 //deseaseRoutes.get('/:id', authenticate, deseaseController.show);
 deseaseRoutes.post('/', deseaseController.create);
 ///deseaseRoutes.put('/:id', authenticate, ValidateUserSchemaOnUpdating, validateRequestSchema, deseaseController.updates);

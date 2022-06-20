@@ -28,6 +28,12 @@ class BrandRepository implements IBrandRepository {
     });
   }
 
+  findAllVehicleBrands(vehicle_id: string): Promise<Brand[]> {
+    return this.ormRepository.find({
+      where: { vehicle_id },
+    });
+  }
+
   public async searchBrandByName(brand: string): Promise<Brand[]> {
     return this.ormRepository.find({
       brand: Like(`%${brand}%`),

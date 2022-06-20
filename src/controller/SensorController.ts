@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import CreateSensorService from '../services/sensor/CreateSensorService';
 import SensorRepository from '../repositories/SensorRepository/SensorRepository';
 import logger from '../logs';
+import ListAllSensorsOfVehicleService from '../services/sensor/ListAllSensorsOfVehicleService';
+import ListAllSensorsOfUserService from '../services/sensor/ListAllSensorsOfUserService';
 
 class SensorController {
 
@@ -11,6 +13,30 @@ class SensorController {
     const sensores = await sensoresRepository.findAll();
 
     return response.json(sensores);
+  }
+
+  public async findAllVehicleSensors(request: Request, response: Response): Promise<Response> {
+    const { vehicle_id } = request.params;
+    const sensorsRepository = new SensorRepository();
+    const sensorsService = new ListAllSensorsOfVehicleService(
+      sensorsRepository,
+    );
+
+    const sensors = await sensorsService.execute(vehicle_id);
+
+    return response.json(sensors);
+  }
+
+  public async findAllUserSensors(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const sensorsRepository = new SensorRepository();
+    const sensorsService = new ListAllSensorsOfUserService(
+      sensorsRepository,
+    );
+
+    const sensors = await sensorsService.execute(user_id);
+
+    return response.json(sensors);
   }
 
   /* public async show(request: Request, response: Response): Promise<Response> {

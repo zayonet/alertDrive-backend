@@ -10,6 +10,8 @@ const sensorController = new SensorController();
 sensorRoutes.get('/', sensorController.index);
 //sensorRoutes.get('/search', sensorController.search);
 //sensorRoutes.get('/:id', authenticate, sensorController.show);
+sensorRoutes.get('/vehicle/:vehicle_id', sensorController.findAllVehicleSensors);
+sensorRoutes.get('/user/:user_id', sensorController.findAllUserSensors);
 sensorRoutes.post('/', sensorController.create);
 //sensorRoutes.put('/:id', authenticate, sensorController.updates);
 //sensorRoutes.patch('/:id', authenticate, sensorController.enable);

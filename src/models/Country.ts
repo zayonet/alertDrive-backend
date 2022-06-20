@@ -10,5 +10,11 @@ export class Country {
   id: string;
 
   @Column()
+  countrycode: string;
+
+  @Column()
   country_name: string;
+
+  @Column()
+  phoneCode: number;
 }

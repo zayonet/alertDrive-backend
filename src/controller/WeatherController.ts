@@ -4,6 +4,8 @@ import WeatherRepository from '../repositories/WeatherRepository/WeatherReposito
 import UserRepository from '../repositories/UserRepository';
 import DeleteWeatherService from '../services/Weather/DeleteWeatherService';
 import logger from '../logs';
+import ListAllWeathersOfUserService from '../services/Weather/ListAllWeatherOfUserService';
+import ListAllWeathersOfVehicleService from '../services/Weather/ListAllWeatherOfVehicleService';
 
 class WeatherController {
 
@@ -15,6 +17,29 @@ class WeatherController {
     return response.json(weathers);
   }
 
+  public async findAllUserWeather(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const weathersRepository = new WeatherRepository();
+    const weathersService = new ListAllWeathersOfUserService(
+      weathersRepository,
+    );
+
+    const weathers = await weathersService.execute(user_id);
+
+    return response.json(weathers);
+  }
+  
+  public async findAllVehicleWeather(request: Request, response: Response): Promise<Response> {
+    const { vehicle_id } = request.params;
+    const weathersRepository = new WeatherRepository();
+    const weathersService = new ListAllWeathersOfVehicleService(
+      weathersRepository,
+    );
+
+    const weathers = await weathersService.execute(vehicle_id);
+
+    return response.json(weathers);
+  }
   public async create(request: Request, response: Response): Promise<Response> {
     const {
       road_type,

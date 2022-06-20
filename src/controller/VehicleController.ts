@@ -11,6 +11,7 @@ import ModelRepository from '../repositories/ModelRepository/ModelRepository';
 import CreateModelService from '../services/model/CreateModelService';
 import BrandRepository from '../repositories/BrandRepository/BrandRepository';
 import CreateBrandService from '../services/brand/CreateBrandService';
+import ListAllVehiclesOfUserService from '../services/vehicle/ListAllVehicleOfUserService';
 
 class VehicleController {
 
@@ -22,6 +23,18 @@ class VehicleController {
     return response.json(vehicles);
   }
 
+  public async findAllUserVehicle(request: Request, response: Response): Promise<Response> {
+    const { user_id } = request.params;
+    const vehiclesRepository = new VehicleRepository();
+    const vehiclesService = new ListAllVehiclesOfUserService(
+      vehiclesRepository,
+    );
+
+    const vehicles = await vehiclesService.execute(user_id);
+
+    return response.json(vehicles);
+  }
+  
   /* public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const vehiclesRepository = new VehicleRepository();

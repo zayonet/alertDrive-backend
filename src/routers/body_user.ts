@@ -8,6 +8,7 @@ const body_userRoutes = Router();
 const body_userController = new Body_UserController();
 
 body_userRoutes.get('/', body_userController.index);
+body_userRoutes.get('/user/:user_id', body_userController.findAllUserBody_User);
 //body_userRoutes.get('/search', body_userController.search);
 body_userRoutes.get('/:id', authenticate, body_userController.show);
 body_userRoutes.post('/', body_userController.create);

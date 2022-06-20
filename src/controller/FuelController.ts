@@ -3,6 +3,7 @@ import CreateFuelService from '../services/fuel/CreateFuelService';
 import FuelRepository from '../repositories/FuelRepository/FuelRepository';
 import DeleteFuelService from '../services/fuel/DeleteFuelService';
 import logger from '../logs';
+import ListAllFuelOfVehicleService from '../services/fuel/ListAllFuelOfVehicleService';
 
 class FuelController {
 
@@ -14,6 +15,19 @@ class FuelController {
     return response.json(fuels);
   }
 
+  public async findAllVehicleFuels(request: Request, response: Response): Promise<Response> {
+    const { vehicle_id } = request.params;
+    const fuelssRepository = new FuelRepository();
+    const fuelssService = new ListAllFuelOfVehicleService(
+      fuelssRepository,
+    );
+
+    const fuelss = await fuelssService.execute(vehicle_id);
+
+    return response.json(fuelss);
+  }
+
+  
   /* public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const fuelsRepository = new FuelRepository();

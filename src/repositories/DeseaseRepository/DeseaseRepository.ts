@@ -1,7 +1,7 @@
 
 import { Repository, getRepository, Like } from 'typeorm';
 import { Desease } from '../../models/Desease';
-import IDeseaseRepository from '../DeseaseRepository/ICountryRepository';
+import IDeseaseRepository from './IDeseaseRepository';
 import ICreateDeseaseDTO from '../../dtos/ICreateDeseaseDTO';
 import AppError from '../../errors/AppError';
 
@@ -28,6 +28,12 @@ class DeseaseRepository implements IDeseaseRepository {
     return this.ormRepository.find({
       desease_name: Like(`%${desease_name
         }%`)
+    });
+  }
+
+  findAllUserDesease(user_id: string): Promise<Desease[]> {
+    return this.ormRepository.find({
+      where: { user_id },
     });
   }
 

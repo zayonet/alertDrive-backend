@@ -5,7 +5,9 @@ import CountryRepository from '../../repositories/CountryRepository/CountryRepos
 import { Country } from './../../models/Country';
 
 interface Request {
+  countrycode: string;
   country_name: string;
+  phoneCode: number;
 }
 
 class CreateCountryService {
@@ -15,11 +17,11 @@ class CreateCountryService {
     this.countryRepository = countryRepository;
   }
 
-  public async execute({ country_name }: Request): Promise<Country> {
+  public async execute({ countrycode, country_name, phoneCode }: Request): Promise<Country> {
 
 
     const country = await this.countryRepository.create({
-      country_name,
+      countrycode, country_name, phoneCode
     });
     return country;
   }

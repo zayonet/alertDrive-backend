@@ -8,6 +8,7 @@ const fuelController = new FuelController();
 
 fuelRoutes.get('/', fuelController.index);
 fuelRoutes.get('/search', fuelController.search);
+fuelRoutes.get('/vehicle/:vehicle_id', fuelController.findAllVehicleFuels);
 //fuelRoutes.get('/:id', authenticate, fuelController.show);
 fuelRoutes.post('/', fuelController.create);
 //fuelRoutes.put('/:id', authenticate, fuelController.updates);
