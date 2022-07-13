@@ -4,6 +4,9 @@ import ActivityRepository from '../repositories/ActivityRepository/ActivityRepos
 import DeleteActivityService from '../services/activity/DeleteActivityService';
 import logger from '../logs';
 import ListAllActivityOfUserService from '../services/activity/ListAllActivitiesOfUserService';
+import ShowActivityService from '../services/activity/ShowActivityService';
+import UserRepository from '../repositories/UserRepository';
+import UpdateActivityService from '../services/activity/UpdateActivityService';
 
 class ActivityController {
 
@@ -27,15 +30,15 @@ class ActivityController {
     return response.json(activities);
   }
 
-  /* public async show(request: Request, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const activitiesRepository = new ActivityRepository();
-    const activitiesService = new ShowActivitieservice(activitiesRepository);
-  
+    const activitiesService = new ShowActivityService(activitiesRepository);
+
     const activities = await activitiesService.execute(id);
-  
+
     return response.json(activities);
-  } */
+  }
 
   public async create(request: Request, response: Response): Promise<Response> {
     const { whitch_food_ate,
@@ -68,6 +71,36 @@ class ActivityController {
     return response.json(activitys);
   }
 
+
+
+  public async updates(request: Request, response: Response): Promise<Response | undefined> {
+    const { id } = request.params;
+    try {
+      const {
+        whitch_food_ate,
+        whitch_food_drank,
+        smoked,
+        description,
+        user_id } = request.body;
+
+      logger.info('whitch_food_ate:' + whitch_food_ate + ' whitch_food_drank:' + whitch_food_drank + ' smoked:' + smoked)
+      const activity_userRepository = new ActivityRepository();
+      const userRepository = new UserRepository();
+      const updateActivity = new UpdateActivityService(activity_userRepository, userRepository);
+
+      const activity = await updateActivity.execute({
+        id,
+        whitch_food_ate,
+        whitch_food_drank,
+        smoked,
+        description,
+        user_id
+      });
+      return response.json(activity);
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 
   public async destroy(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;

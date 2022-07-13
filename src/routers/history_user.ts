@@ -12,7 +12,7 @@ historyUserRoutes.get('/', historyUserController.index);
 historyUserRoutes.get('/user/:user_id', historyUserController.findAllUserHistory_User);
 //historyUserRoutes.get('/:id', authenticate, historyUserController.show);
 historyUserRoutes.post('/', historyUserController.create);
-///historyUserRoutes.put('/:id', authenticate, ValidateUserSchemaOnUpdating, validateRequestSchema, historyUserController.updates);
+historyUserRoutes.put('/:id', authenticate, historyUserController.updates);
 //historyUserRoutes.patch('/:id', authenticate, historyUserController.enable);
 historyUserRoutes.delete('/:id', authenticate, historyUserController.destroy);
 

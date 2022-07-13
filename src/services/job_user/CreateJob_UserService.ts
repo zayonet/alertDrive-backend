@@ -20,7 +20,8 @@ class CreateJob_UserService {
     this.job_userRepository = job_userRepository;
   }
 
-  public async execute({ occupation,
+  public async execute({
+    occupation,
     start_work_time,
     end_work_time,
     period,

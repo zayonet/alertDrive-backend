@@ -4,6 +4,9 @@ import Job_UserRepository from '../repositories/Job_User/Job_UserRepository';
 import DeleteJob_UserService from '../services/job_user/DeleteJob_UserService';
 import logger from '../logs';
 import ListAllJob_UserOfUserService from '../services/job_user/ListAllJobOfUserService';
+import UserRepository from '../repositories/UserRepository';
+import UpdateJobUserService from '../services/job_user/UpdateJobUserService';
+import ShowJobUserService from '../services/job_user/ShowJobUserService';
 
 class Job_UserController {
 
@@ -27,7 +30,7 @@ class Job_UserController {
     return response.json(job_User);
   }
 
-  
+
   public async search(request: Request, response: Response): Promise<Response> {
     const { name } = request.query;
     const job_usersRepository = new Job_UserRepository();
@@ -37,15 +40,15 @@ class Job_UserController {
     return response.json(job_users);
   }
 
-  /* public async show(request: Request, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const vehiclesRepository = new Job_UserRepository();
-    const countriesService = new ShowVehicleService(vehiclesRepository);
-  
-    const countries = await countriesService.execute(id);
-  
-    return response.json(countries);
-  } */
+    const jobsRepository = new Job_UserRepository();
+    const jobsService = new ShowJobUserService(jobsRepository);
+
+    const jobs = await jobsService.execute(id);
+
+    return response.json(jobs);
+  }
 
   public async create(request: Request, response: Response): Promise<Response> {
     const { occupation,
@@ -68,6 +71,37 @@ class Job_UserController {
     });
 
     return response.json(job_user);
+  }
+
+  public async updates(request: Request, response: Response): Promise<Response | undefined> {
+    const { id } = request.params;
+    try {
+      const {
+        occupation,
+        start_work_time,
+        end_work_time,
+        period,
+        company,
+        user_id } = request.body;
+
+      logger.info('end_work_time:' + end_work_time + ' start_work_time:' + start_work_time + ' occupation:' + occupation)
+      const history_userRepository = new Job_UserRepository();
+      const userRepository = new UserRepository();
+      const updateHistory = new UpdateJobUserService(history_userRepository, userRepository);
+
+      const history = await updateHistory.execute({
+        id,
+        occupation,
+        start_work_time,
+        end_work_time,
+        period,
+        company,
+        user_id
+      });
+      return response.json(history);
+    } catch (error) {
+      logger.error(error)
+    }
   }
 
 

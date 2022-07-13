@@ -4,6 +4,8 @@ import HistoryUserRepository from '../repositories/HistoryUserRepository/History
 import DeleteHistoryUserService from '../services/historyUser/DeleteHistoryUserService';
 import logger from '../logs';
 import ListAllHistoryOfUserService from '../services/historyUser/ListAllHistoryOfUserService';
+import UserRepository from '../repositories/UserRepository';
+import UpdateHistory_UserService from '../services/historyUser/UpdateHistoryUserService';
 
 class HistoryUserController {
 
@@ -57,6 +59,36 @@ class HistoryUserController {
     });
 
     return response.json(historyUser);
+  }
+
+
+  public async updates(request: Request, response: Response): Promise<Response | undefined> {
+    const { id } = request.params;
+    try {
+      const {
+        accident_before,
+        is_taking_medicine_now,
+        is_sick_now,
+        user_id,
+        description } = request.body;
+      console.log(request.body)
+      logger.info(' accid:' + accident_before + ' sickness:' + is_sick_now + ' medicine:' + is_taking_medicine_now)
+      const history_userRepository = new HistoryUserRepository();
+      const userRepository = new UserRepository();
+      const updateHistory = new UpdateHistory_UserService(history_userRepository, userRepository);
+
+      const history = await updateHistory.execute({
+        id,
+        accident_before,
+        is_taking_medicine_now,
+        is_sick_now,
+        description,
+        user_id
+      });
+      return response.json(history);
+    } catch (error) {
+      logger.error(error)
+    }
   }
 
 

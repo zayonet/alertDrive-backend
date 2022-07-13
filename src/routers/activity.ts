@@ -9,9 +9,9 @@ const activityController = new ActivityController();
 activityRoutes.get('/', activityController.index);
 activityRoutes.get('/search', activityController.search);
 activityRoutes.get('/user/:user_id', activityController.findAllUserActivity);
-//activityRoutes.get('/:id', authenticate, activityController.show);
+activityRoutes.get('/:id', authenticate, activityController.show);
 activityRoutes.post('/', activityController.create);
-//activityRoutes.put('/:id', authenticate, activityController.updates);
+activityRoutes.put('/:id', authenticate, activityController.updates);
 //activityRoutes.patch('/:id', authenticate, activityController.enable);
 activityRoutes.delete('/:id', authenticate, activityController.destroy);
 

@@ -25,7 +25,7 @@ class Body_UserRepository implements IBody_UserRepository {
 
   public async findById(id: string): Promise<Body_User | undefined> {
     return this.ormRepository.findOne({
-      where: { id },
+      where: { id }
     });
   }
 

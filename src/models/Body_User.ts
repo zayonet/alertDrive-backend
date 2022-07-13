@@ -21,9 +21,7 @@ class Body_User {
   @Column()
   weigh: string;
 
-  @Column({
-    unique: true,
-  })
+  @Column()
   blood_type: string;
 
   @Column()

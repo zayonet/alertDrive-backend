@@ -18,11 +18,22 @@ class DeseaseRepository implements IDeseaseRepository {
   }
 
 
+  /* public async findById(id: string): Promise<Desease | undefined> {
+    return this.ormRepository.findOne(id, {
+      relations: ['user'],
+    });
+  } */
   public async findById(id: string): Promise<Desease | undefined> {
     return this.ormRepository.findOne({
       where: { id },
     });
   }
+  /* public async findByIdBody(id: string): Promise<Desease | undefined> {
+    return this.ormRepository.findOne(id, {
+      relations: ['body_user'],
+    });
+  } */
+
 
   public async searchDeseaseByName(desease_name: string): Promise<Desease[]> {
     return this.ormRepository.find({
@@ -43,6 +54,13 @@ class DeseaseRepository implements IDeseaseRepository {
     const desease = this.ormRepository.create({
       desease_name, desease_type, description, user_id, body_user_id
     });
+    const checkUser = await this.ormRepository.findOne({
+      where: { user_id },
+    });
+
+    if (checkUser?.user_id) {
+      throw new AppError('Este utilizador já existe! Tente outro', 422);
+    }
 
     await this.ormRepository.save(desease);
 

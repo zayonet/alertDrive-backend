@@ -1,6 +1,6 @@
 import AppError from '../../errors/AppError';
-import IDeseaseRepository from '../../repositories/DeseaseRepository/ICountryRepository';
-import {Desease} from '../../models/Desease';
+import IDeseaseRepository from '../../repositories/DeseaseRepository/IDeseaseRepository';
+import { Desease } from '../../models/Desease';
 
 class ShowDeseaseService {
   private deseaseRepository: IDeseaseRepository;

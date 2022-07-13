@@ -38,8 +38,7 @@ class Job_User {
 
   @OneToOne(type => User, job_user => Job_User, {
     onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-    eager: true,
+    onUpdate: 'CASCADE'
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
