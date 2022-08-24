@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn
 } from 'typeorm';
+import Automobile from './Automobile';
 import Vehicle from './Vehicle';
 
 @Entity('fuels')
@@ -24,8 +25,10 @@ export class Fuel {
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
   })
+  /* @JoinColumn({ name: 'vehicle_id' })
+  vehicle: Vehicle; */
   @JoinColumn({ name: 'vehicle_id' })
-  vehicle: Vehicle;
+  vehicle: Automobile;
 
   @CreateDateColumn()
   created_at: Date;

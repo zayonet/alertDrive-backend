@@ -18,6 +18,7 @@ import brandRoutes from './brand';
 import historyUserRoutes from './history_user';
 import activityRoutes from './activity';
 import carRoutes from './car';
+import automobileRoutes from './automobile';
 
 const routes = Router();
 const prefixRoutes = '/api/v1';
@@ -48,5 +49,6 @@ routes.use(`${prefixRoutes}/brand`, brandRoutes);
 routes.use(`${prefixRoutes}/HistoryUser`, historyUserRoutes);
 routes.use(`${prefixRoutes}/activity`, activityRoutes);
 routes.use(`${prefixRoutes}/car`, carRoutes);
+routes.use(`${prefixRoutes}/automobile`, automobileRoutes);
 
 export default routes;
